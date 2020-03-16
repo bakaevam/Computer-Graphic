@@ -2,7 +2,8 @@
 #include <qimage.h>
 #include <string.h>
 #include <iostream>
-#include "Filters.h"
+#include "Spot_Filters.h"
+#include "Matrix_Filters.h"
 using namespace std;
 
 int main(int argc, char *argv[])
@@ -24,11 +25,11 @@ int main(int argc, char *argv[])
 
 	QImage newImgBlur(img);
 	Blur_filter* blur = new Blur_filter();
-	newImgBlur = blur->calculateNewImagePixMap(img, 0);
+	newImgBlur = blur->calculateNewImagePixMap(img, 1);
 
 	QImage newImgGausBlur(img);
 	Gaussian_blur_filter* Gausblur = new Gaussian_blur_filter();
-	newImgGausBlur = Gausblur->calculateNewImagePixMap(img, 0);
+	newImgGausBlur = Gausblur->calculateNewImagePixMap(img, 3);
 
 	QImage newImgGray(img);
 	GrayScaleFilter* gray = new GrayScaleFilter();
