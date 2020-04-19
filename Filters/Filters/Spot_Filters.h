@@ -49,4 +49,31 @@ public:
 	QImage calculateNewImagePixMap(const QImage& img, int radius);
 	QColor calculateNewPixelColor(QImage img, int x, int y, int radius);
 };
+
+class WaveFilter_01 : public Filters
+{
+public:
+	WaveFilter_01() {};
+	~WaveFilter_01() {};
+
+	QImage calculateNewImagePixMap(const QImage& img, int radius);
+};
+
+class WaveFilter_02 : public Filters
+{
+public:
+	WaveFilter_02() {};
+	~WaveFilter_02() {};
+
+	QImage calculateNewImagePixMap(const QImage& img, int radius);
+};
+
+class MedianFilter : public Filters
+{
+public:
+	MedianFilter() {};
+	~MedianFilter() {};
+
+	QImage calculateNewImagePixMap(const QImage& img, int radius);
+};
 #endif

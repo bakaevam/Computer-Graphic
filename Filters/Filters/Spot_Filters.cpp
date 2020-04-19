@@ -2,6 +2,7 @@
 #include "Clamp.h"
 #include <qimage.h>
 #include <qcolor.h>
+#include <math.h>
 
 
 QImage Invert_filter::calculateNewImagePixMap(const QImage& img, int radius)
@@ -93,4 +94,68 @@ QColor BrightnessFilter::calculateNewPixelColor(QImage img, int x, int y, int ra
 		clamp<int>(img_color.blue() + k, 255, 0));
 
 	return img_color;
+};
+
+QImage WaveFilter_01::calculateNewImagePixMap(const QImage& img, int radius)
+{
+	QImage img_result(img);
+
+	for (int x = 0; x < img.width(); x++)
+		for (int y = 0; y < img.height(); y++)
+		{
+			if (((x + 20 * sin(2 * 3.14 * y / 60)) < img.width()) && ((x + 20 * sin(2 * 3.14 * y / 60)) >= 0))
+			{
+				QColor img_color = img.pixelColor((x + 20 * sin(2 * 3.14 * y / 60)), y);
+				img_result.setPixelColor(x, y, img_color);
+			}
+			else
+			{
+				QColor img_color = img.pixelColor(x, y);
+				img_result.setPixelColor(x, y, img_color);
+			}
+
+		}
+
+	return img_result;
+};
+
+QImage WaveFilter_02::calculateNewImagePixMap(const QImage& img, int radius)
+{
+	QImage img_result(img);
+
+	for (int x = 0; x < img.width(); x++)
+		for (int y = 0; y < img.height(); y++)
+		{
+			if (((x + 20 * sin(2 * 3.14 * x / 30)) < img.width()) && ((x + 20 * sin(2 * 3.14 * x / 30)) >= 0))
+			{
+				QColor img_color = img.pixelColor((x + 20 * sin(2 * 3.14 * x / 30)), y);
+				img_result.setPixelColor(x, y, img_color);
+			}
+			else
+			{
+				QColor img_color = img.pixelColor(x, y);
+				img_result.setPixelColor(x, y, img_color);
+			}
+
+		}
+
+	return img_result;
+};
+
+QImage MedianFilter::calculateNewImagePixMap(const QImage& img, int radius)
+{
+	QImage img_result(img);
+	int size = radius * 2 + 1;
+
+	for (int x = 0; x < img.width(); x++)
+	{
+		for (int y = 0; y < img.height(); y++)
+		{
+			int returnR = 0;
+			int returnG = 0;
+			int returnB = 0;
+
+
+		}
+	}
 };

@@ -80,11 +80,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Filters.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix_Filters.cpp" />
+    <ClCompile Include="Morphology.cpp" />
+    <ClCompile Include="Spot_Filters.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Clamp.h" />
     <ClInclude Include="Filters.h" />
+    <ClInclude Include="Matrix_Filters.h" />
+    <ClInclude Include="Morphology.h" />
+    <ClInclude Include="Spot_Filters.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">
