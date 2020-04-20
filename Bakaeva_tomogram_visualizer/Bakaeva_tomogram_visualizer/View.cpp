@@ -162,7 +162,7 @@ void View::Up()
 
 void View::Down()
 {
-    if ((layer - 1) < 0)
+    if ((layer - 1) >= 0)
         layer--;
 
     qDebug() << layer;
@@ -180,7 +180,7 @@ void View::Up10()
 
 void View::Down10()
 {
-    if ((layer - 10) < 0)
+    if ((layer - 10) >= 0)
         layer -= 10;
 
     qDebug() << layer;
