@@ -13,6 +13,13 @@ class View : public QGLWidget
 {
     Q_OBJECT
 
+public:
+    View(QGLWidget* parent = Q_NULLPTR);
+    ~View() {};
+
+    void LoadData(QString fileName);
+    int clamp(int value, int min, int max);
+
 private:
     Data data;
     int layer; //Слой, который будет визуализироваться
@@ -45,19 +52,13 @@ private:
     GLuint VBOtexture; //Номер текстуры в памяти видеокарты
     void Load2DTexture();
 
-public:
-    View(QGLWidget* parent = Q_NULLPTR);
-    ~View() {};
-
-    void LoadData(QString fileName);
-    int clamp(int value, int min, int max);
-
 protected:
-    void paintGL(); // Метод для вывода изображения на экран
-    void resizeGL(int newWidth, int newHeight); // Метод, вызываемый после каждого изменения размера окна
-    void initializeGL(); //Метод для инициализирования OpenGL
+    void paintGL() override; // Метод для вывода изображения на экран
+    void resizeGL(int newWidth, int newHeight) override; // Метод, вызываемый после каждого изменения размера окна
+    void initializeGL() override; //Метод для инициализирования OpenGL
 
 public slots:
     void keyPressEvent(QKeyEvent* event) override; //Обработка нажатия клавиш
 };
+
 #endif

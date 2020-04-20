@@ -56,11 +56,12 @@ void View::VisualizationQuards()
     int w = data.getWidth();
     int h = data.getHeight();
 
+    glBegin(GL_QUADS);
+
     for(int y = 0; y < (h - 1); y++)
         for (int x = 0; x < (w - 1); x++)
         {
             // Определяем примитив, который будем рисовать - четырехугольник
-            glBegin(GL_QUADS);
 
             c = TransferFunction(data[layer * w * h + y * w + x]);
             qglColor(c);
@@ -77,20 +78,20 @@ void View::VisualizationQuards()
             c = TransferFunction(data[layer * w * h + y * w + x + 1]);
             qglColor(c);
             glVertex2i((x + 1), y);
-
-            glEnd();
         }
+
+    glEnd();
 };
 
 void View::keyPressEvent(QKeyEvent* event)
 {
-    if (event->nativeVirtualKey() == Qt::Key_U)
+    if (event->nativeVirtualKey() == Qt::Key_W)
     {
         //Подняться на слой выше
         Up();
         changeLayer();
     }
-    else if (event->nativeVirtualKey() == Qt::Key_D)
+    else if (event->nativeVirtualKey() == Qt::Key_S)
     {
         //Опуститься на слой ниже
         Down();
@@ -152,38 +153,38 @@ void View::genTextureImage()
 
 void View::Up()
 {
-    if ((layer + 1) >= data.getDepth())
-        layer += 1;
+    if ((layer + 1) < data.getDepth())
+        layer++;
 
-    qDebug() << layer + 1;
-    updateGL();
+    qDebug() << layer;
+    update();
 };
 
 void View::Down()
 {
-    if ((layer - 1) >= 0)
-        layer -= 1;
+    if ((layer - 1) < 0)
+        layer--;
 
-    qDebug() << layer + 1;
-    updateGL();
+    qDebug() << layer;
+    update();
 };
 
 void View::Up10()
 {
-    if ((layer + 10) >= data.getDepth())
+    if ((layer + 10) < data.getDepth())
         layer += 10;
 
-    qDebug() << layer + 1;
-    updateGL();
+    qDebug() << layer;
+    update();
 };
 
 void View::Down10()
 {
-    if ((layer - 10) >= 0)
+    if ((layer - 10) < 0)
         layer -= 10;
 
-    qDebug() << layer + 1;
-    updateGL();
+    qDebug() << layer;
+    update();
 };
 
 View::View(QGLWidget* parent): QGLWidget(parent)
@@ -198,6 +199,7 @@ void View::LoadData(QString fileName)
 {
     data.readFile(fileName);
     resize(clamp(data.getWidth(), MIN_WIN_SIZE, MAX_WIN_SIZE), clamp(data.getHeight(), MIN_WIN_SIZE, MAX_WIN_SIZE));
+    update();
 };
 
 int View::clamp(int value, int min, int max)
@@ -237,11 +239,26 @@ void View::VisualizationQuardStrip()
     int w = data.getWidth();
     int h = data.getHeight();
 
-    for (int y = 0; y < (h - 1); y++)
-        for (int x = 0; x < (w - 1); x++)
+    for (int y = 0; y < h; y++)
+        for (int x = 0; x < w; x++)
         {
             glBegin(GL_QUAD_STRIP);
 
+            c = TransferFunction(data[layer * w * h + y * w + x]);
+            qglColor(c);
+            glVertex2i(x, y);
+
+            c = TransferFunction(data[layer * w * h + (y + 1) * w + x]);
+            qglColor(c);
+            glVertex2i(x, (y + 1));
+
+            c = TransferFunction(data[layer * w * h + y * w + x + 1]);
+            qglColor(c);
+            glVertex2i((x + 1), y);
+
+            c = TransferFunction(data[layer * w * h + (y + 1) * w + x + 1]);
+            qglColor(c);
+            glVertex2i((x + 1), (y + 1));
 
             glEnd();
         }
