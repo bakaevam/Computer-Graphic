@@ -56,6 +56,7 @@ protected:
     void paintGL() override; // Метод для вывода изображения на экран
     void resizeGL(int newWidth, int newHeight) override; // Метод, вызываемый после каждого изменения размера окна
     void initializeGL() override; //Метод для инициализирования OpenGL
+    void openMinMaxDialog();
 
 public slots:
     void keyPressEvent(QKeyEvent* event) override; //Обработка нажатия клавиш

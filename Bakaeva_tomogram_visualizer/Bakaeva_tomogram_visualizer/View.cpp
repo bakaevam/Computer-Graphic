@@ -1,5 +1,7 @@
 #include "View.h"
 #include "Data.h"
+#include "DialogMinMax.h"
+#include <qobject.h>
 
 
 void View::initializeGL()
@@ -47,6 +49,7 @@ void View::paintGL()
 QColor View::TransferFunction(short value)
 {
     int c = (value - data.getMin()) * 255 / (data.getMax() - data.getMin());
+    c = clamp(c, 0, 255);
     return QColor(c, c, c);
 };
 
@@ -96,6 +99,24 @@ void View::keyPressEvent(QKeyEvent* event)
         //Опуститься на слой ниже
         Down();
         changeLayer();
+    }
+    else if (event->nativeVirtualKey() == Qt::Key_C)
+    {
+        //Окно смена минимума и максимума
+        openMinMaxDialog();
+
+        if(visualization_state == VISUALIZATION_TEXTURE)
+        {
+            genTextureImage();
+            Load2DTexture();
+        }
+
+        update();
+    }
+    else if (event->nativeVirtualKey() == Qt::Key_X)
+    {
+        resizeGL(data.getHeight(), data.getWidth());
+        update();
     }
     else if (event->nativeVirtualKey() == Qt::Key_N)
     {
@@ -262,4 +283,16 @@ void View::VisualizationQuardStrip()
 
             glEnd();
         }
+};
+
+void View::openMinMaxDialog()
+{
+    DialogMinMax* dialog = new DialogMinMax;
+    dialog->exec();
+
+    if(dialog->getMin() > 0)
+        data.min = dialog->getMin();
+
+    if(dialog->getMax() > 0)
+        data.max = dialog->getMax();
 };

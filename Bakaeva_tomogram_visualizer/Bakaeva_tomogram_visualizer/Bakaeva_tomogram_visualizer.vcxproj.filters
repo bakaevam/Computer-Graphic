@@ -37,6 +37,9 @@
     <ClCompile Include="View.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DialogMinMax.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <QtMoc Include="Bakaeva_tomogram_visualizer.h">
@@ -45,9 +48,15 @@
     <QtMoc Include="View.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+    <QtMoc Include="DialogMinMax.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Bakaeva_tomogram_visualizer.ui">
+      <Filter>Form Files</Filter>
+    </QtUic>
+    <QtUic Include="dialogminmax.ui">
       <Filter>Form Files</Filter>
     </QtUic>
   </ItemGroup>

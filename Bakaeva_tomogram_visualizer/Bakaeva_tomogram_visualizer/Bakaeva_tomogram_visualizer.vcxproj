@@ -84,6 +84,7 @@
   <ItemGroup>
     <ClCompile Include="Bakaeva_tomogram_visualizer.cpp" />
     <ClCompile Include="Data.cpp" />
+    <ClCompile Include="DialogMinMax.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="View.cpp" />
   </ItemGroup>
@@ -92,12 +93,14 @@
   </ItemGroup>
   <ItemGroup>
     <QtUic Include="Bakaeva_tomogram_visualizer.ui" />
+    <QtUic Include="dialogminmax.ui" />
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Bakaeva_tomogram_visualizer.qrc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
+    <QtMoc Include="DialogMinMax.h" />
     <QtMoc Include="View.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
