@@ -113,6 +113,15 @@ void View::keyPressEvent(QKeyEvent* event)
 
         update();
     }
+    else if (event->nativeVirtualKey() == Qt::Key_V)
+    {
+        //Открытие окна выбора файла
+        QFileDialog* fileDialog = new QFileDialog;
+        QString newPath = fileDialog->getOpenFileName();
+        LoadData(newPath);
+
+        update();
+    }
     else if (event->nativeVirtualKey() == Qt::Key_X)
     {
         resizeGL(data.getHeight(), data.getWidth());
