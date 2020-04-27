@@ -2,7 +2,6 @@
 #define _VIEW_H_
 #include <QGLWidget>
 #include <QtOpenGL>
-#include <QTimer>
 #include <qdebug.h>
 
 #include "Data.h"
@@ -23,11 +22,10 @@ public:
 private:
     Data data;
     int layer; //Слой, который будет визуализироваться
+    int axis = 3;
 
     void Up();
     void Down();
-    void Up10();
-    void Down10();
 
     static const int MAX_WIN_SIZE = 1000;
     static const int MIN_WIN_SIZE = 250;
