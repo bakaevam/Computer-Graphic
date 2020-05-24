@@ -17,9 +17,11 @@ public:
     ~ShaderWidget();
 
 private:
+    //Подключение шейдеров к основной программе
     QOpenGLShaderProgram m_program;
 
     GLfloat* vert_data;
+    //Расположение массива в пределах списка параметров шейдерной программы
     int vert_data_location;
 };
 
